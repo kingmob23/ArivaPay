@@ -1,4 +1,4 @@
-import { Config, Connect, ConnectEvents } from '@vkontakte/superappkit';
+import { Config, Connect, ConnectEvents } from './node_modules/@vkontakte/superappkit/dist';
 
 Config.init({
     appId: 51759872, // идентификатор приложения
