@@ -1,3 +1,7 @@
 flask
 flask_admin
+Flask-SQLAlchemy
+# Flask-Migrate
+psycopg2-binary
+SQLAlchemy
 gunicorn
