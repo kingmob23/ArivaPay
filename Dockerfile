@@ -15,7 +15,6 @@ COPY . .
 # Stage 2: Create the final Flask container
 FROM python:latest
 
-# Set the working directory for your Flask app
 WORKDIR /app
 
 COPY requirements.txt .
@@ -26,5 +25,6 @@ RUN pip install -r requirements.txt
 COPY --from=frontend /app/frontend /app/static
 COPY . .
 
-# Start your Flask application
-CMD ["gunicorn", "-w 4", "--bind", "0.0.0.0:8000", "main:app"]
+EXPOSE 8000
+
+CMD ["gunicorn", "-w 4", "--bind", "0.0.0.0:8000", "run:app"]
