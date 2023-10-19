@@ -36,8 +36,13 @@ def create_tables():
 
 
 @app.route("/")
-def index():
+def inde_page():
     return "<p>Main Page</p>"
+
+
+@app.route("/account")
+def account_apge():
+    return "<p>ЛичКаб</p>"
 
 
 @app.route("/auth")
