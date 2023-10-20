@@ -1,8 +1,12 @@
 flask==2.2
 flask_admin
-Flask-Security
-flask_sqlalchemy
-Flask-Migrate
-pytz
-email_validator
+Flask-SQLAlchemy
+Flask-Script
+sqlalchemy-utils
+# Flask-Migrate
+psycopg2-binary
+SQLAlchemy
 gunicorn
+pytest
+pytest-flask
+requests
