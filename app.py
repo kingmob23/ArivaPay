@@ -42,7 +42,7 @@ def inde_page():
 
 @app.route("/account")
 def account_apge():
-    return "<p>ЛичКаб</p>"
+    return "<p>Personal</p>"
 
 
 @app.route("/auth")
