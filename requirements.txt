@@ -1,4 +1,5 @@
-flask==2.2
+Flask
+Werkzeug
 flask_admin
 Flask-SQLAlchemy
 Flask-Script
