@@ -2,3 +2,4 @@ payenv/
 __pycache__
 .pytest_cache
 nginx.conf
+custom_postgresql.conf
