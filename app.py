@@ -1,10 +1,16 @@
+import logging
+
 from flask import Flask, render_template
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
-import logging
 
-DB_URL = "postgresql://user:password@db:5432/postgres"
+import toml
+
+with open("config.toml", "r") as f:
+    config = toml.load(f)
+
+DB_URL = f"postgresql://{config['db']['user']}:config['db']['password']@db:5432/config['db']['db_name']"
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
