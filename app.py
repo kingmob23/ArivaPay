@@ -10,7 +10,7 @@ import toml
 with open("config.toml", "r") as f:
     config = toml.load(f)
 
-DB_URL = f"postgresql://{config['db']['user']}:config['db']['password']@db:5432/config['db']['db_name']"
+DB_URL = f"postgresql://{config['db']['user']}:{config['db']['password']}@db:5432/{config['db']['db_name']}"
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
