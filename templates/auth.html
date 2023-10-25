@@ -10,46 +10,11 @@
 
 <body>
     <script>
-        import { Config, Connect, ConnectEvents } from '@vkontakte/superappkit';
+        import { Config, Connect } from '@vkontakte/superappkit';
 
         Config.init({
-            appId: appId, // Идентификатор приложения
+            appId: appId, // идентификатор приложения
         });
-
-        const oneTapButton = Connect.buttonOneTapAuth({
-            callback: function (e) {
-                // Log the event object for debugging
-                console.log("Event object:", e);
-
-                const type = e.type;
-
-                if (!type) {
-                    return false;
-                }
-
-                switch (type) {
-                    case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS:
-                        console.log("Login Success:", e);
-                        return Connect.redirectAuth({ url: 'http://kaizenpay.ru/account' });
-                }
-                return false;
-            },
-            // Не обязательный параметр с настройками отображения OneTap
-            options: {
-                showAlternativeLogin: true, // Отображение кнопки "Войти другим способом"
-                displayMode: 'default', // Режим отображения кнопки 'default' | 'name_phone' | 'phone_name'
-                buttonStyles: {
-                    borderRadius: 8, // Радиус скругления кнопок
-                }
-            },
-        });
-
-
-        // Получить iframe можно с помощью метода getFrame()
-        document.body.appendChild(oneTapButton.getFrame());
-
-
-        // Удалить iframe можно с помощью OneTapButton.destroy();
     </script>
     <h1>Авторизация через VK ID</h1>
 
