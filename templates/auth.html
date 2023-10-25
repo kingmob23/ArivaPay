@@ -10,31 +10,22 @@
 
 <body>
     <script>
-        const { Connect, Config, ConnectEvents } = window.SuperAppKit;
-
-        Config.init({
-            appId: 51774124, // идентификатор приложения
-        });
-
         const oneTapButton = Connect.buttonOneTapAuth({
-            // Обязательный параметр в который нужно добавить обработчик событий приходящих из SDK
             callback: function (e) {
-                const type = e.type;
+                // Log the event object for debugging
+                console.log("Event object:", e);
 
+                const type = e.type;
 
                 if (!type) {
                     return false;
                 }
 
-
                 switch (type) {
                     case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS:
-                        console.log(e);
-                        return Connect.redirectAuth({ url: 'http://kaizenpay.ru/account'})
-
+                        console.log("Login Success:", e);
+                        return Connect.redirectAuth({ url: 'http://kaizenpay.ru/account' });
                 }
-
-
                 return false;
             },
             // Не обязательный параметр с настройками отображения OneTap
