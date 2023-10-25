@@ -50,4 +50,4 @@ def auth_page():
 
 
 admin = Admin(app, name="adminpage", template_mode="bootstrap3")
-admin.add_view(ModelView(Dude, db.session))
+admin.add_view(ModelView(User, db.session))
