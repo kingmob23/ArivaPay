@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация через VK ID</title>
-    <script src="https://unpkg.com/@vkontakte/superappkit@1.57.0/dist/index-umd.js"></script>
+    <script src="https://unpkg.com/@vkontakte/superappkit@1.60.0/dist/index-umd.js"></script>
 </head>
 
 <body>
     <script>
-        const { Config, Connect } = window.SuperAppKit;
+        const { Connect, Config } = window.SuperAppKit;
 
         Config.init({
             appId: 51774124,
@@ -27,11 +27,7 @@
                 }
 
 
-                switch (type) {
-                    case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS: // = 'VKSDKOneTapAuthLoginSuccess'
-                        console.log(e);
-                        return false
-                }
+                console.log(type)
 
 
                 return false;
