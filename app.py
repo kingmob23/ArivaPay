@@ -37,10 +37,6 @@ class Dude(db.Model):
         return str(self.id)
 
 
-# Create Database Tables
-db.create_all()
-
-
 # Flask Routes
 @app.route("/")
 def index_page():
@@ -62,4 +58,6 @@ admin = Admin(app, name="adminpage", template_mode="bootstrap3")
 admin.add_view(ModelView(Dude, db.session))
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run()
