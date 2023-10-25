@@ -19,19 +19,11 @@ app.config["FLASK_ADMIN_SWATCH"] = "cerulean"
 
 app.logger.setLevel(logging.INFO)
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
-class Dude(db.Model):
-    __tablename__ = "dude"
-
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-
-    def __init__(self, id):
-        self.id = id
-
-    def __repr__(self):
-        return str(self.id)
 
 
 with app.app_context():
