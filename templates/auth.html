@@ -10,17 +10,11 @@
 
 <body>
     <script>
-        console.log("Script running");
+        import { Config, Connect, ConnectEvents } from '@vkontakte/superappkit';
 
-        // Create a new div element
-        const newDiv = document.createElement("div");
-
-        // Add some text content
-        newDiv.textContent = "Hello, this is a new div.";
-
-        // Append the new div element to the body
-        document.body.appendChild(newDiv);
-
+        Config.init({
+            appId: appId, // Идентификатор приложения
+        });
 
         const oneTapButton = Connect.buttonOneTapAuth({
             callback: function (e) {
