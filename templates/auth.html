@@ -10,11 +10,48 @@
 
 <body>
     <script>
-        import { Config, Connect } from '@vkontakte/superappkit';
+        const { Config, Connect } = window.SuperAppKit;
 
         Config.init({
-            appId: appId, // идентификатор приложения
+            appId: 51774124,
         });
+
+        const oneTapButton = Connect.buttonOneTapAuth({
+            // Обязательный параметр в который нужно добавить обработчик событий приходящих из SDK
+            callback: function (e) {
+                const type = e.type;
+
+
+                if (!type) {
+                    return false;
+                }
+
+
+                switch (type) {
+                    case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS: // = 'VKSDKOneTapAuthLoginSuccess'
+                        console.log(e);
+                        return false
+                }
+
+
+                return false;
+            },
+            // Не обязательный параметр с настройками отображения OneTap
+            options: {
+                showAlternativeLogin: true, // Отображение кнопки "Войти другим способом"
+                displayMode: 'default', // Режим отображения кнопки 'default' | 'name_phone' | 'phone_name'
+                buttonStyles: {
+                    borderRadius: 8, // Радиус скругления кнопок
+                }
+            },
+        });
+
+
+        // Получить iframe можно с помощью метода getFrame()
+        document.body.appendChild(oneTapButton.getFrame());
+
+
+        // Удалить iframe можно с помощью OneTapButton.destroy();
     </script>
     <h1>Авторизация через VK ID</h1>
 
