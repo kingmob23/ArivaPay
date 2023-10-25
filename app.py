@@ -38,13 +38,7 @@ class Dude(db.Model):
 
 
 # Create Database Tables
-def create_tables():
-    with app.app_context():
-        if not Dude.__table__.exists(bind=db.engine):
-            db.create_all()
-
-
-create_tables()
+db.create_all()
 
 
 # Flask Routes
