@@ -7,11 +7,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 import toml
 
+# Load Configurations
 with open("config.toml", "r") as f:
     config = toml.load(f)
 
 DB_URL = f"postgresql://{config['db']['user']}:{config['db']['password']}@db:5432/{config['db']['db_name']}"
 
+# Flask App Setup
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -19,7 +21,7 @@ app.config["FLASK_ADMIN_SWATCH"] = "cerulean"
 
 app.logger.setLevel(logging.INFO)
 
-
+# SQLAlchemy Setup
 db = SQLAlchemy(app)
 
 
@@ -32,22 +34,27 @@ class Dude(db.Model):
         self.id = id
 
     def __repr__(self):
-        return self.id
+        return str(self.id)
 
 
+# Create Database Tables
 def create_tables():
     with app.app_context():
         if not Dude.__table__.exists(bind=db.engine):
             db.create_all()
 
 
+create_tables()
+
+
+# Flask Routes
 @app.route("/")
-def inde_page():
+def index_page():
     return "<p>Main Page</p>"
 
 
 @app.route("/account")
-def account_apge():
+def account_page():
     return "<p>Personal</p>"
 
 
@@ -56,6 +63,7 @@ def auth_page():
     return render_template("auth.html")
 
 
+# Flask-Admin Setup
 admin = Admin(app, name="adminpage", template_mode="bootstrap3")
 admin.add_view(ModelView(Dude, db.session))
 
