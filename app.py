@@ -26,6 +26,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
 
+db.init_app(app)
+
 with app.app_context():
     db.create_all()
 
