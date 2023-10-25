@@ -11,6 +11,17 @@
 <body>
     <script>
         console.log("Script running");
+
+        // Create a new div element
+        const newDiv = document.createElement("div");
+
+        // Add some text content
+        newDiv.textContent = "Hello, this is a new div.";
+
+        // Append the new div element to the body
+        document.body.appendChild(newDiv);
+
+
         const oneTapButton = Connect.buttonOneTapAuth({
             callback: function (e) {
                 // Log the event object for debugging
