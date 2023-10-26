@@ -36,7 +36,10 @@ db.init_app(app)
 
 @app.route("/")
 def index_page():
-    return "<p>Main Page</p>"
+    return """
+<p>Main Page</p>
+<nav><a href="/">Main Page</a> | <a href="/auth">Auth Page</a></nav><p>Main Page</p>
+"""
 
 
 @app.route("/account")
