@@ -1,6 +1,7 @@
 payenv/
 __pycache__
 .pytest_cache
+config/
 nginx.conf
 custom_postgresql.conf
 config.toml
