@@ -1,6 +1,7 @@
 from flask import Flask
+from .models import db, User, Admin as AdminModel
 from .models import db
-from flask_admin import User, Admin
+from flask_admin import Admin
 from .admin.views import MyModelView, MyAdminIndexView
 import toml
 
@@ -24,7 +25,7 @@ def create_app():
         app, name="adminpage", template_mode="bootstrap3", index_view=MyAdminIndexView()
     )
     admin.add_view(MyModelView(User, db.session))
-    admin.add_view(MyModelView(Admin, db.session))
+    admin.add_view(MyModelView(AdminModel, db.session))
 
     from app.main import main as main_blueprint
 
