@@ -11,7 +11,7 @@ services:
       - ./custom_postgresql.conf:/etc/postgresql/postgresql.conf
 
   web:
-    build: .
+    build: ./app/
     ports:
       - "8000:8000"
     depends_on:
