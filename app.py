@@ -1,12 +1,15 @@
 import logging
 
-from flask import Flask, render_template
-from flask_admin import Admin
+from flask import Flask, render_template, redirect, url_for
+from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
-from flask_sqlalchemy import SQLAlchemy
-
+from flask_login import LoginManager, UserMixin, login_user, login_required
 import toml
 
+from models.models import User, Admin
+from models.db_init import init_db
+
+# Load config
 with open("config.toml", "r") as f:
     config = toml.load(f)
 
@@ -14,24 +17,34 @@ DB_URL = f"postgresql://{config['db']['user']}:{config['db']['password']}@db:543
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DB_URL
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["FLASK_ADMIN_SWATCH"] = "cerulean"
-
+app.config["SECRET_KEY"] = "your_secret_key"
 app.logger.setLevel(logging.INFO)
 
-db = SQLAlchemy()
+# Initialize DB
+db = init_db(app)
+
+# Flask-Login setup
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
 
 
-class User(db.Model):
-    __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True, nullable=False)
+class MyModelView(ModelView):
+    def is_accessible(self):
+        # Logic to check if current_user is an admin
+        return True
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for("login"))
 
 
-db.init_app(app)
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        # Logic to check if current_user is an admin
+        return True
 
-# with app.app_context():
-#     db.create_all()
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for("login"))
 
 
 @app.route("/")
@@ -52,5 +65,14 @@ def auth_page():
     return render_template("auth.html")
 
 
-admin = Admin(app, name="adminpage", template_mode="bootstrap3")
-admin.add_view(ModelView(User, db.session))
+@app.route("/login")
+def login():
+    # Logic to login and validate admin user
+    return render_template("login.html")
+
+
+admin = Admin(
+    app, name="adminpage", template_mode="bootstrap3", index_view=MyAdminIndexView()
+)
+admin.add_view(MyModelView(User, db.session))
+admin.add_view(MyModelView(Admin, db.session))
