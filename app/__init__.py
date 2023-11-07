@@ -29,8 +29,8 @@ def create_app():
         index_view=MyAdminIndexView(),
     )
 
-    # admin.add_view(MyModelView(User, db.session))
-    admin.add_view(MyModelView(AdminModel, db.session))
+    admin.add_view(MyModelView(User, db.session))
+    # admin.add_view(MyModelView(AdminModel, db.session))
 
     from app.main import main as main_blueprint
 
