@@ -8,8 +8,7 @@ import toml
 def create_app():
     app = Flask(__name__)
 
-    # Load config
-    with open("./config.toml", "r") as f:
+    with open("/app/app/config.toml", "r") as f:
         config = toml.load(f)
 
     DB_URL = f"postgresql://{config['db']['user']}:{config['db']['password']}@db:5432/{config['db']['db_name']}"
