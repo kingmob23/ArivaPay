@@ -1,6 +1,5 @@
 from flask import Flask
 from .models import db, User, Admin as AdminModel
-from .models import db
 from flask_admin import Admin
 from .admin.views import MyModelView, MyAdminIndexView
 import toml
