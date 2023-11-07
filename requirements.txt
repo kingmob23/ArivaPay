@@ -1,0 +1,15 @@
+Flask
+Werkzeug
+flask_admin
+Flask-SQLAlchemy
+Flask-Script
+sqlalchemy-utils
+# Flask-Migrate
+psycopg2-binary
+SQLAlchemy
+gunicorn
+pytest
+pytest-flask
+requests
+toml
+flask_login
