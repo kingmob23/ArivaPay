@@ -12,8 +12,6 @@ services:
 
   web:
     build: .
-    command: >
-      sh -c "flask db upgrade && python manage.py init_db && python run.py"
     ports:
       - "8000:8000"
     depends_on:
