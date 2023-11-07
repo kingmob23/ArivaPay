@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["gunicorn", "-w", "1", "--bind", "0.0.0.0:8000", "run:app"]
+CMD ["gunicorn", "-w", "1", "--chdir", "app", "--bind", "0.0.0.0:8000", "run:app"]
