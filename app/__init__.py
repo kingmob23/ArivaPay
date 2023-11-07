@@ -21,16 +21,11 @@ def create_app():
     db.init_app(app)
 
     admin = Admin(
-        app,
-        name="adminpage",
-        endpoint="admin2",
-        url="/admin2",
-        template_mode="bootstrap3",
-        index_view=MyAdminIndexView(),
+        app, name="adminpage", template_mode="bootstrap3", index_view=MyAdminIndexView()
     )
 
     admin.add_view(MyModelView(User, db.session))
-    # admin.add_view(MyModelView(AdminModel, db.session))
+    admin.add_view(MyModelView(AdminModel, db.session, endpoint='adminmodel'))
 
     from app.main import main as main_blueprint
 
