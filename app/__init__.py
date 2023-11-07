@@ -1,14 +1,21 @@
-from flask import Flask
-from .models import db, User, Admin as AdminModel
-from flask_admin import Admin
-from .admin.views import MyModelView, MyAdminIndexView
+import os
+
 import toml
+from flask import Flask
+from flask_admin import Admin
+
+from .models import db, User, Admin as AdminModel
+from .admin.views import MyModelView, MyAdminIndexView
 
 
 def create_app():
     app = Flask(__name__)
 
-    with open("/app/app/config.toml", "r") as f:
+    base_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
+    config_path = os.path.join(base_dir, "app", "config.toml")
+
+    with open(config_path, "r") as f:
         config = toml.load(f)
 
     DB_URL = f"postgresql://{config['db']['user']}:{config['db']['password']}@db:5432/{config['db']['db_name']}"
