@@ -1,14 +1,12 @@
-from flask_script import Manager
 from app import create_app, db
 
 app = create_app()
-manager = Manager(app)
 
-@manager.command
-def init_db():
+@app.cli.command("init_db")
+def init_db_command():
     """Create database tables from sqlalchemy models."""
-    with app.app_context():
-        db.create_all()
+    db.create_all()
+    print("Initialized the database.")
 
 if __name__ == '__main__':
-    manager.run()
+    app.run()
