@@ -1,13 +1,24 @@
+# Flask core and extensions
 Flask
-Werkzeug
-flask_admin
 Flask-SQLAlchemy
+flask_login
+flask_admin
+
+# Database
+SQLAlchemy
 sqlalchemy-utils
 psycopg2-binary
-SQLAlchemy
+
+# Server
 gunicorn
+
+# Testing
 pytest
 pytest-flask
+
+# Utilities
 requests
 toml
-flask_login
+
+# WSGI
+Werkzeug

@@ -1,4 +1,6 @@
 import pytest
+from sqlalchemy.orm import sessionmaker, scoped_session
+
 from app import create_app
 from app.models import db as _db, User, Admin
 
@@ -8,13 +10,11 @@ def test_app():
     """
     Create a Flask application context for the tests.
     """
-    app = create_app()
-    app.config.update(
-        {
-            "TESTING": True,
-            "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",  # In-memory SQLite database
-        }
-    )
+    test_config = {
+        "TESTING": True,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+    }
+    app = create_app(test_config)
 
     # Flask context and database setup
     with app.app_context():
@@ -33,7 +33,9 @@ def session(test_app):
     transaction = connection.begin()
 
     options = dict(bind=connection, binds={})
-    session = _db.create_scoped_session(options=options)
+
+    session_factory = sessionmaker(bind=connection)
+    session = scoped_session(session_factory)
 
     _db.session = session
 
