@@ -11,6 +11,9 @@
 ## Установка и настройка
 [docs/Installation.md](./docs/Installation.md).
 
+### Инициализация БД
+
+
 ## Структура кода
 [docs/CodeStructure.md](./docs/CodeStructure.md)
 
