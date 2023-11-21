@@ -10,8 +10,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
-    - name: Check Current User
-      run: whoami
 
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
