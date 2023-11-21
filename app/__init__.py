@@ -6,10 +6,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 from .admin.views import MyAdminIndexView, MyModelView
 from .models import User, Admin as AdminModel
+from .models import User, Admin, Purchase, PromoCode, Transaction
 from .api.promocodes import promocodes_blueprint
 from .api.purchases import purchases_blueprint
 from .auth import auth as auth_blueprint
 from .main import main as main_blueprint
+
 
 db = SQLAlchemy()
 
