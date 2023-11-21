@@ -9,7 +9,7 @@ class MyModelView(ModelView):
         return True
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect("/login")
+        return redirect("login")
 
 
 class MyAdminIndexView(AdminIndexView):

@@ -1,17 +1,17 @@
 import os
-
 import toml
-from app.api.promocodes import promocodes_blueprint
-from app.api.purchases import purchases_blueprint
-from app.auth import auth as auth_blueprint
-from app.main import main as main_blueprint
 from flask import Flask
 from flask_admin import Admin
+from flask_sqlalchemy import SQLAlchemy
 
 from .admin.views import MyAdminIndexView, MyModelView
-from .models import Admin as AdminModel
-from .models import User, db
+from .models import User, Admin as AdminModel
+from .api.promocodes import promocodes_blueprint
+from .api.purchases import purchases_blueprint
+from .auth import auth as auth_blueprint
+from .main import main as main_blueprint
 
+db = SQLAlchemy()
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -27,23 +27,25 @@ def create_app(test_config=None):
     else:
         # Load the testing configuration passed to the function
         app.config.update(test_config)
+
     app.config["FLASK_ADMIN_SWATCH"] = "cerulean"
     app.config["SECRET_KEY"] = "your_secret_key"
 
     db.init_app(app)
 
-    admin = Admin(
-        app, name="adminpage", template_mode="bootstrap3", index_view=MyAdminIndexView()
-    )
-
+    admin = Admin(app, name="adminpage", template_mode="bootstrap3", index_view=MyAdminIndexView())
     admin.add_view(MyModelView(User, db.session))
     admin.add_view(MyModelView(AdminModel, db.session, endpoint="adminmodel"))
 
     app.register_blueprint(main_blueprint)
-
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
-
     app.register_blueprint(purchases_blueprint)
     app.register_blueprint(promocodes_blueprint)
+
+    @app.cli.command("init_db")
+    def init_db_command():
+        """Create database tables from SQLAlchemy models."""
+        db.create_all()
+        print("Initialized the database.")
 
     return app
