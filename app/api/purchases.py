@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-from .models import Purchase
+from app.models.models import Purchase
 
 purchases_blueprint = Blueprint("purchases", __name__)
 

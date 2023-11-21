@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-from .models import PromoCode
+from app.models.models import PromoCode
 
 promocodes_blueprint = Blueprint("promocodes", __name__)
 
