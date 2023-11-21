@@ -12,7 +12,7 @@
 [docs/Installation.md](./docs/Installation.md).
 
 ### Инициализация БД
-flask init_db
+docker-compose exec web flask init_db
 
 ## Структура кода
 [docs/CodeStructure.md](./docs/CodeStructure.md)
