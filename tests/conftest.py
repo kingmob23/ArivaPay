@@ -44,3 +44,14 @@ def session(test_app):
     transaction.rollback()
     connection.close()
     session.remove()
+
+
+@pytest.fixture(scope="function")
+def test_user(session):
+    """
+    Create a test user for the database.
+    """
+    user = User(username="test_user")
+    session.add(user)
+    session.commit()
+    return user
