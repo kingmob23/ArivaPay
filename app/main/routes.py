@@ -1,5 +1,5 @@
 from . import main
-from app.auth import auth_page
+from .auth import auth_page
 
 
 @main.route("/")
